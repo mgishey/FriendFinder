@@ -10,19 +10,25 @@ var PORT = process.env.PORT || 8080;
 
 // Set up the Express app to handle data parsing
 
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Router
+// Routing
 
 const dirPath = path.join(__dirname, "/app/routing/");
 console.log(dirPath);
 
-require(dirPath + "apiRoutes")(app);
-require(dirPath + "htmlRoutes")(app);
+app.get("/", function (req, res){
+    res.sendFile(path.join(__dirname, "/app/public/home.html"));
+});
+
+
+
+//require(dirPath + "apiRoutes")(app);
+//require(dirPath + "htmlRoutes")(app);
 
 // Listener
 
-app.listen(PORT, function(){
+app.listen(PORT, function () {
     console.log("App listening on PORT: " + PORT);
 });
