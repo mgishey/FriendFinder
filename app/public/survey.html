@@ -65,11 +65,11 @@
         <h4>About You</h4>
         <div class="form-group">
             <label>Name (Required)</label>
-            <input type="text" class="form-control" id="name" required>
+            <input type="text" class="form-control" id="name" required="true">
         </div>
         <div class="form-group">
             <label>Link to Photo (Required)</label>
-            <input type="text" class="form-control" id="pic_name" required>
+            <input type="text" class="form-control" id="pic_name" required="true">
         </div>
 
         <div>
@@ -230,6 +230,7 @@
         // Get the form inputs
 
         $("#submit").on("click", function (event) {
+            event.preventDefault();
 
             function validateForm() {
                 var isValid = true;
@@ -249,8 +250,8 @@
 
             if(validateForm()){
                 var userData = {
-                name: $("#name").val(),
-                photo: $("#pic_name").val(),
+                name: $("#name").val().trim(),
+                photo: $("#pic_name").val().trim(),
                 scores: [
                     $("#q1").val(),
                     $("#q2").val(),
@@ -263,10 +264,27 @@
                     $("#q9").val(),
                     $("#q10").val()
                 ]};
-                console.table(userData);
+                //console.table(userData);
             }else{
                 alert("Please fill out all fields before submitting");
             }
+        });
+
+        // Add new user to friends list
+
+        $.post("/api/friends", userData).done(function(data){
+            if(data){
+            alert("Thank you for being a Friend!");
+            } else {
+                alert("Somthing went wrong");
+            }
+
+            /*
+            // Clear the form
+            $("#name").val("");
+            $("#pic_name").val("");
+            $(".custom-select").val("");
+            */
         });
 
 
