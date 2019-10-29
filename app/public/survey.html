@@ -227,67 +227,68 @@
         </script>
 
     <script type="text/javascript">
-        // Get the form inputs
 
-        $("#submit").on("click", function (event) {
-            event.preventDefault();
+        $(document).ready(function () {
+            // Get the form inputs
+            $("#submit").on("click", function (event) {
+                event.preventDefault();
 
-            function validateForm() {
-                var isValid = true;
-                $(".form-control").each(function () {
-                    if ($(this).val() === "") {
-                        isValid = false;
-                    }
+                function validateForm() {
+                    var isValid = true;
+                    $(".form-control").each(function () {
+                        if ($(this).val() === "") {
+                            isValid = false;
+                        }
+                    });
+
+                    $(".custom-select").each(function () {
+                        if ($(this).val() === "Select an Option") {
+                            isValid = false;
+                        }
+                    });
+                    return isValid;
+                }
+
+                if (validateForm()) {
+                    console.log("Form has been validated");
+                    var userData = {
+                        name: $("#name").val().trim(),
+                        photo: $("#pic_name").val().trim(),
+                        scores: [
+                            $("#q1").val(),
+                            $("#q2").val(),
+                            $("#q3").val(),
+                            $("#q4").val(),
+                            $("#q5").val(),
+                            $("#q6").val(),
+                            $("#q7").val(),
+                            $("#q8").val(),
+                            $("#q9").val(),
+                            $("#q10").val()
+                        ]
+                    };
+                } else {
+                    alert("Please fill out all fields before submitting");
+                }
+
+
+                console.log("User input: " + JSON.stringify(userData));
+
+                // Add new user to friends list
+
+                $.post("/api/friends", userData).done(function (data) {
+                    console.log("Response: " + JSON(stringify(data)));
+
+                    /*
+                    // Clear the form
+                    $("#name").val("");
+                    $("#pic_name").val("");
+                    $(".custom-select").val("");
+                    */
                 });
+            });
 
-                $(".custom-select").each(function () {
-                    if ($(this).val() === "Select an Option") {
-                        isValid = false;
-                    }
-                });
-                return isValid;
-            }
-
-            if(validateForm()){
-                var userData = {
-                name: $("#name").val().trim(),
-                photo: $("#pic_name").val().trim(),
-                scores: [
-                    $("#q1").val(),
-                    $("#q2").val(),
-                    $("#q3").val(),
-                    $("#q4").val(),
-                    $("#q5").val(),
-                    $("#q6").val(),
-                    $("#q7").val(),
-                    $("#q8").val(),
-                    $("#q9").val(),
-                    $("#q10").val()
-                ]};
-                //console.table(userData);
-            }else{
-                alert("Please fill out all fields before submitting");
-            }
         });
-
-        // Add new user to friends list
-
-        $.post("/api/friends", userData).done(function(data){
-            if(data){
-            alert("Thank you for being a Friend!");
-            } else {
-                alert("Somthing went wrong");
-            }
-
-            /*
-            // Clear the form
-            $("#name").val("");
-            $("#pic_name").val("");
-            $(".custom-select").val("");
-            */
-        });
-
-
 
     </script>
 
