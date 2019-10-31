@@ -206,6 +206,23 @@
             <button class="btn btn-primary" type="submit" id="submit">Submit</button>
         </div>
 
+        <!-- Modal box displaying Friend Match -->
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-content">
+                <h3 class="modal-title">Your Friend Match</h3>
+                <hr>
+                <h4 id="matchName"></h4>
+                <img src="" id="matchPhoto" class="materialboxed" width="350">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+
+
+
 
         <!-- END OF CONTAINER -->
     </div>
@@ -277,14 +294,22 @@
                 // Add new user to friends list
 
                 $.post("/api/friends", userData).done(function (data) {
-                    console.log("Response: " + JSON(stringify(data)));
+                    console.log("End Response: " + JSON.stringify(data));
 
-                    /*
+                    console.log("Match Name: " + data.name);
+                    console.log("Match Photo: " + data.photo);
+
+                    $("#matchName").html(data.name);
+                    $("#matchPhoto").attr("src", data.photo);
+
+                    $("#myModal").modal();
+
+                    
                     // Clear the form
                     $("#name").val("");
                     $("#pic_name").val("");
                     $(".custom-select").val("");
-                    */
+                    
                 });
             });
 
