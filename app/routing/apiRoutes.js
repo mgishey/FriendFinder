@@ -12,8 +12,6 @@ module.exports = function (app) {
         res.json(friendsData);
     });
 
-
-
     app.post("/api/friends", function (req, res) {
         var newFriend = req.body
         // console.log("New Friend: " + JSON.stringify(newFriend));
@@ -24,7 +22,6 @@ module.exports = function (app) {
 
         // Compatiblity code goes here and is then sent back
         // to the user on the survey.html page
-
 
         // Set fakeDiff high so that the first entry's values are read
         // and subsequent values are compared to the preceding diff value.
@@ -46,7 +43,6 @@ module.exports = function (app) {
                 fakeDiff = diff;
                 matchName = friendsData[i].name;
                 matchPhoto = friendsData[i].photo;
-
             }
         }
         // console.log("Match Name: " + matchName);
@@ -57,11 +53,5 @@ module.exports = function (app) {
         // Add new friend
 
         friendsData.push(newFriend);
-
-
-
-
-
-
     });
 };
