@@ -28,7 +28,7 @@
     <!-- Internal Style Sheet-->
     <style>
         body {
-            background-color: lightcoral;
+            background-color: lightsteelblue;
         }
 
         h4 {
@@ -39,6 +39,11 @@
         label {
             font-size: 20px;
             font-weight: bold;
+        }
+
+        #submit {
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
 
@@ -295,15 +300,15 @@
                 }
 
 
-                console.log("User input: " + JSON.stringify(userData));
+                // console.log("User input: " + JSON.stringify(userData));
 
                 // Add new user to friends list
 
                 $.post("/api/friends", userData).done(function (data) {
-                    console.log("End Response: " + JSON.stringify(data));
+                    // console.log("End Response: " + JSON.stringify(data));
 
-                     console.log("Match Name: " + data.name);
-                     console.log("Match Photo: " + data.photo);
+                     // console.log("Match Name: " + data.name);
+                     // console.log("Match Photo: " + data.photo);
 
                     $("#matchName").html(data.name);
                     $("#matchPhoto").attr("src", data.photo);
@@ -316,7 +321,7 @@
                     $("#pic_name").val("");
                     $(".custom-select").val("");
 
-                    console.log("The End");
+                    // console.log("The End");
                     
                 });
             });
