@@ -41,9 +41,7 @@
             font-weight: bold;
         }
 
-        button {
-            margin-top: 30px;
-        }
+
     </style>
 
     <!-- Title your page -->
@@ -178,7 +176,7 @@
 
         <div>
             <h4>Question 9</h4>
-            <h5>You enjoy wathcing American Football versus Soccer</h5>
+            <h5>Football does not mean soccer</h5>
             <select class="custom-select custom-select-sm" style="width: 200px" ; id="q9">
                 <option selected>Select an Option</option>
                 <option value="1">1 (Strongly Disagree)</option>
@@ -208,17 +206,25 @@
 
         <!-- Modal box displaying Friend Match -->
         <!-- The Modal -->
-        <div class="modal" id="myModal">
-            <div class="modal-content">
-                <h3 class="modal-title">Your Friend Match</h3>
-                <hr>
-                <h4 id="matchName"></h4>
-                <img src="" id="matchPhoto" class="materialboxed" width="350">
+        <div id="myModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Your Friend Match!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h5 id="matchName"></h5>
+                  <img src="" id="matchPhoto" class="materialboxed" width="350">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-        </div>
+          </div>
 
 
 
@@ -296,8 +302,8 @@
                 $.post("/api/friends", userData).done(function (data) {
                     console.log("End Response: " + JSON.stringify(data));
 
-                    console.log("Match Name: " + data.name);
-                    console.log("Match Photo: " + data.photo);
+                     console.log("Match Name: " + data.name);
+                     console.log("Match Photo: " + data.photo);
 
                     $("#matchName").html(data.name);
                     $("#matchPhoto").attr("src", data.photo);
@@ -309,6 +315,8 @@
                     $("#name").val("");
                     $("#pic_name").val("");
                     $(".custom-select").val("");
+
+                    console.log("The End");
                     
                 });
             });

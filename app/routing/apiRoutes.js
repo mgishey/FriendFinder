@@ -16,11 +16,11 @@ module.exports = function (app) {
 
     app.post("/api/friends", function (req, res) {
         var newFriend = req.body
-        console.log("New Friend: " + JSON.stringify(newFriend));
+        // console.log("New Friend: " + JSON.stringify(newFriend));
 
         // Get new friend scores
         var newScores = newFriend.scores;
-        console.log("New Scores: " + newScores);
+        // console.log("New Scores: " + newScores);
 
         // Compatiblity code goes here and is then sent back
         // to the user on the survey.html page
