@@ -304,7 +304,7 @@
 
                 // Add new user to friends list
 
-                $.post("/api/friends", userData).done(function (data) {
+                $.post("/api/friends", userData).then(function (data) {
                     // console.log("End Response: " + JSON.stringify(data));
 
                      // console.log("Match Name: " + data.name);
